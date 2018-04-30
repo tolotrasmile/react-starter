@@ -3,12 +3,16 @@ import { Link, NavLink } from 'react-router-dom'
 
 export const StyledLink = styled(Link)`
   font-size: 1em;
-  padding: 1em;
-  border-radius: 3px;
+  margin: 1em;
+  color: palevioletred;
+  font-weight: bold;
+  text-decoration: none;
 `
 
 export const StyledNavLink = styled(NavLink)`
   font-size: 1em;
-  padding: 1em;
-  border: 1px solid palevioletred;
+  margin: 1em;
+  color: palevioletred;
+  font-weight: bold;
+  text-decoration: none;
 `
