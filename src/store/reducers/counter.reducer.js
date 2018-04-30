@@ -2,7 +2,7 @@ import { DECREMENT, INCREMENT } from '../types/counter.type'
 
 const initialState = { count: 0 }
 
-export default function (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT:
       return { ...state, count: state.count + action.payload }
