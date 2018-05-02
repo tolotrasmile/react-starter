@@ -4,8 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 export default class Login extends React.Component {
   state = {
-    redirectToReferrer: false,
-    signIn: false
+    redirectToReferrer: false
   }
 
   login = () => {
@@ -13,20 +12,15 @@ export default class Login extends React.Component {
   }
 
   signIn = () => {
-    auth.isSignIn = true;
-    this.setState({ signIn: true })
+    this.setState({ signIn: auth.isSignIn = true })
   }
 
   render () {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer, signIn } = this.state
+    const { redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
       return <Redirect to='/home'/>
-    }
-
-    if (signIn) {
-      return <Redirect to='/'/>
     }
 
     return (

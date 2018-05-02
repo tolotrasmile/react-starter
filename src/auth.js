@@ -2,11 +2,10 @@ import ls from 'local-storage'
 
 export const auth = {
   isAuthenticated: ls.get('login'),
-  isSignIn: false,
   authenticate (cb) {
     sleep(100).then(() => {
+      ls.set('login', true)
       this.isAuthenticated = true
-      this.isSignIn = false
       if (cb && typeof cb === 'function') {
         cb(this.isAuthenticated)
       }
@@ -14,8 +13,8 @@ export const auth = {
   },
   signOut (cb) {
     sleep(100).then(() => {
+      ls.set('login', false)
       this.isAuthenticated = false
-      this.isSignIn = false
       if (cb && typeof cb === 'function') {
         cb(this.isAuthenticated)
       }

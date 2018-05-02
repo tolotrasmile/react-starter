@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router'
 import { auth } from './auth'
 import { Redirect } from 'react-router-dom'
 import Login from './components/Login'
-import SignIn from './components/SignIn'
 
 class App extends Component {
   render () {
@@ -12,9 +11,9 @@ class App extends Component {
       <div>
         <div className='content'>
           <Switch>
-            <Route path="/login" component={Login}/>
-            <Route path="/signin" component={SignIn}/>
-            <Auth path="/" component={Home}/>
+            <Route path="/login" render={(props) => auth.isAuthenticated ? <Redirect to='/' />: <Login {...props} />}/>
+            <AuthRoute path="/" component={Home}/>
+            <AuthRoute path="/test" component={Home}/>
           </Switch>
         </div>
       </div>
@@ -22,21 +21,19 @@ class App extends Component {
   }
 }
 
-const Home = ({ history }) => (
+const Home = ({ history }) => console.log(auth.isAuthenticated) || (
   <div>
     <h1>Home</h1>
     <button onClick={() => auth.signOut(() => history.push('/login'))}>Signout</button>
   </div>
 )
 
-const Auth = ({ component: Component, ...rest }) => (
+const AuthRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={
     props => {
-      if (!auth.isAuthenticated) {
-        const path = auth.isSignIn ? '/signin' : '/login'
-        return <Redirect to={{ pathname: path, state: { from: props.location } }}/>
-      }
-      return <Component {...props} />
+      return auth.isAuthenticated ?
+        <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
     }
   }/>
 )
