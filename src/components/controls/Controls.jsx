@@ -11,15 +11,18 @@ export const Heading = styled.h1`
 export const StyledLink = styled(Link)`
   font-size: 1em;
   margin: 1em;
-  color: palevioletred;
+  color: white;
   font-weight: bold;
   text-decoration: none;
+  :hover {
+    border-bottom: 1px solid white;
+  }
 `
 
 export const StyledNavLink = styled(NavLink)`
   font-size: 1em;
   margin: 1em;
-  color: ${defaultColor};
+  color: white;
   font-weight: bold;
   text-decoration: none;
 `
@@ -40,6 +43,7 @@ export const Input = styled.input`
   :focus, :active {
     outline: none;
   }
+  transition: border .3s ease-in;
   border: 1px solid ${(props) => props.active ? defaultColor : '#eee'};
 `
 
@@ -49,7 +53,20 @@ export const Button = styled.button`
   border-radius: .2em;
   background: ${defaultColor};
   color: white;
-  border: none;
+  transition: background-color .3s ease-in;
+  border: 1px solid ${defaultColor};
+
+  ${props => !props.disabled && css`
+    :hover {
+      color: ${defaultColor};
+      background: white;
+      ${props => props.outline && css`
+        background: ${defaultColor};
+        color: white;
+      `}
+    }
+  `}
+
   :focus, :active {
     outline: none;
   }
@@ -57,12 +74,11 @@ export const Button = styled.button`
   ${props => props.outline && css`
     background: white;
     color: ${defaultColor};
-    border: 1px solid ${defaultColor};
   `}
 
   ${props => props.disabled && css`
     background: white;
-    color: #eee;
-    border: 1px solid #eee;
+    color: #d8d8d8;
+    border: 1px solid #d8d8d8;
   `}
 `

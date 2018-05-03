@@ -1,41 +1,36 @@
 import React, { Component } from 'react'
-import './App.css'
 import { Route, Switch } from 'react-router'
-import { auth } from './auth'
-import { Redirect } from 'react-router-dom'
-import Login from './components/Login'
-import SignIn from './components/SignIn'
-import { Button } from './components/Controls'
-import { Wrapper } from './components/Wrapper'
+import Login from './components/auth/Login'
+import SignIn from './components/auth/SignIn'
+import { Wrapper } from './components/controls/Wrapper'
+import Home from './components/Home'
+import AuthRoute from './components/auth/AuthRoute'
+import { Header } from './components/controls/Header'
+import { Heading, StyledLink, StyledNavLink } from './components/controls/Controls'
 
 // Rx Storybook
 class App extends Component {
   render () {
     return (
-      <Wrapper>
-        <Switch>
-          <Route path="/login" component={Login}/>
-          <Route path="/signin" component={SignIn}/>
-          <AuthRoute path="/" component={Home}/>
-          <AuthRoute path="/test" component={Home}/>
-        </Switch>
-      </Wrapper>
+      <React.Fragment>
+        <Header>
+          <StyledLink to='test1'>Link1</StyledLink>
+          <StyledNavLink to='test2'>Link2</StyledNavLink>
+          <StyledLink to='test3'>Link3</StyledLink>
+        </Header>
+        <Wrapper>
+          <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/signin" component={SignIn}/>
+            <AuthRoute exact path="/" component={Home}/>
+            <AuthRoute exact path="/test1" render={props => <Heading {...props}>Test1</Heading>}/>
+            <AuthRoute exact path="/test2" component={Home}/>
+            <AuthRoute exact path="/test3" component={Home}/>
+          </Switch>
+        </Wrapper>
+      </React.Fragment>
     )
   }
 }
-
-const Home = ({ history }) => (
-  <div>
-    <h1>Home</h1>
-    <Button onClick={() => auth.signOut().then(() => history.push('/login'))}>Signout</Button>
-  </div>
-)
-
-const AuthRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (auth.isAuthenticated === true
-    ? <Component {...props} />
-    : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
-  )}/>
-)
 
 export default App

@@ -1,8 +1,8 @@
 import React from 'react'
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { Redirect } from 'react-router-dom'
 import { Form, Field, reduxForm } from 'redux-form'
-import { Label, Input, FormGroup, Button, Heading } from './Controls'
+import { Label, Input, FormGroup, Button, Heading } from '../controls/Controls'
 
 class Login extends React.Component {
   constructor (props) {

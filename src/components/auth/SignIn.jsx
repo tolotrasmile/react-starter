@@ -1,7 +1,7 @@
 import React from 'react'
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { Redirect } from 'react-router-dom'
-import { Button } from './Controls'
+import { Button } from '../controls/Controls'
 
 export default class SignIn extends React.Component {
   state = {

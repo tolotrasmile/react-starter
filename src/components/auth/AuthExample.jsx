@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Link, Redirect, Route, withRouter } from 'react-router-dom'
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import Login from './Login'
 
 ////////////////////////////////////////////////////////////
