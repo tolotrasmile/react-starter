@@ -1,8 +1,8 @@
 import React from 'react'
 import { auth } from '../auth'
 import { Redirect } from 'react-router-dom'
-import { Field, reduxForm } from 'redux-form'
-import { Label, Input, FormGroup, Button } from './Controls'
+import { Form, Field, reduxForm } from 'redux-form'
+import { Label, Input, FormGroup, Button, Heading } from './Controls'
 
 class Login extends React.Component {
   constructor (props) {
@@ -25,7 +25,7 @@ class Login extends React.Component {
 
   render () {
     const { redirectToReferrer, signIn, from } = this.state
-    const { handleSubmit, pristine } = this.props
+    const { handleSubmit, pristine, submitting } = this.props
 
     if (redirectToReferrer) {
       return <Redirect to={from}/>
@@ -36,24 +36,24 @@ class Login extends React.Component {
     }
 
     return (
-      <form onSubmit={handleSubmit(this.login)}>
-        <h1>Login</h1>
+      <Form onSubmit={handleSubmit(this.login)}>
+        <Heading>Login</Heading>
         <p>You must log in to view the page at {from.pathname}</p>
         <Field name='login' label='Login' type='text' component={this.renderInput}/>
         <Field name='password' label='Password' type='password' component={this.renderInput}/>
         <div>
-          <Button disabled={pristine} outline active={false} type='submit'>Login</Button>
+          <Button disabled={pristine || submitting} outline active={false} type='submit'>Login</Button>
           <Button onClick={this.signIn}>Sign in</Button>
         </div>
-      </form>
+      </Form>
     )
   }
 
-  renderInput = ({ input, label, type }) => (
+  renderInput = ({ input, label, type, ...rest}) => (
     <FormGroup>
       <Label>{label}</Label>
-      <div>
-        <Input {...input} placeholder={label} type={type}/>
+      <div style={{margin: 'auto'}}>
+        <Input {...input} placeholder={label} type={type} active={rest.meta.active} />
       </div>
     </FormGroup>
   )

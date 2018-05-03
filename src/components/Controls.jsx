@@ -1,5 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link, NavLink } from 'react-router-dom'
+
+const defaultColor = 'palevioletred'
+
+export const Heading = styled.h1`
+  font-size: 2em;
+  color: ${defaultColor};
+`
 
 export const StyledLink = styled(Link)`
   font-size: 1em;
@@ -12,7 +19,7 @@ export const StyledLink = styled(Link)`
 export const StyledNavLink = styled(NavLink)`
   font-size: 1em;
   margin: 1em;
-  color: palevioletred;
+  color: ${defaultColor};
   font-weight: bold;
   text-decoration: none;
 `
@@ -28,16 +35,34 @@ export const FormGroup = styled.div`
 
 export const Input = styled.input`
   padding: .5em;
-  margin: .5em 0;
+  margin: .5em auto;
   border-radius: .2em;
-  border: 1px solid ${(props) => props.color ? props.color : '#eee'}
+  :focus, :active {
+    outline: none;
+  }
+  border: 1px solid ${(props) => props.active ? defaultColor : '#eee'};
 `
 
 export const Button = styled.button`
   padding: .5em 1em;
   margin: 0 .5em .5em 0;
   border-radius: .2em;
-  background: ${props => props.outline ? 'white' : 'palevioletred'};
-  color: ${props => props.outline ? 'palevioletred' : 'white'};
-  border: ${props => props.outline ? '1px solid palevioletred' : 'none'};
+  background: ${defaultColor};
+  color: white;
+  border: none;
+  :focus, :active {
+    outline: none;
+  }
+
+  ${props => props.outline && css`
+    background: white;
+    color: ${defaultColor};
+    border: 1px solid ${defaultColor};
+  `}
+
+  ${props => props.disabled && css`
+    background: white;
+    color: #eee;
+    border: 1px solid #eee;
+  `}
 `
