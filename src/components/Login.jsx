@@ -1,35 +1,62 @@
 import React from 'react'
 import { auth } from '../auth'
 import { Redirect } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+import { Label, Input, FormGroup, Button } from './Controls'
 
-export default class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
+class Login extends React.Component {
+  constructor (props) {
+    super(props)
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    this.state = {
+      redirectToReferrer: auth.isAuthenticated,
+      signIn: false,
+      from
+    }
   }
 
-  login = () => {
-    auth.authenticate((auth) => this.setState({ redirectToReferrer: auth }))
+  login = (values) => {
+    auth.authenticate(values).then((auth) => this.setState({ redirectToReferrer: auth }))
   }
 
   signIn = () => {
-    this.setState({ signIn: auth.isSignIn = true })
+    this.setState({ signIn: true })
   }
 
   render () {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
+    const { redirectToReferrer, signIn, from } = this.state
+    const { handleSubmit, pristine } = this.props
 
     if (redirectToReferrer) {
-      return <Redirect to='/home'/>
+      return <Redirect to={from}/>
+    }
+
+    if (signIn) {
+      return <Redirect to='/signin'/>
     }
 
     return (
-      <div>
+      <form onSubmit={handleSubmit(this.login)}>
         <h1>Login</h1>
         <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-        <button onClick={this.signIn}>Sign in</button>
-      </div>
+        <Field name='login' label='Login' type='text' component={this.renderInput}/>
+        <Field name='password' label='Password' type='password' component={this.renderInput}/>
+        <div>
+          <Button disabled={pristine} outline active={false} type='submit'>Login</Button>
+          <Button onClick={this.signIn}>Sign in</Button>
+        </div>
+      </form>
     )
   }
+
+  renderInput = ({ input, label, type }) => (
+    <FormGroup>
+      <Label>{label}</Label>
+      <div>
+        <Input {...input} placeholder={label} type={type}/>
+      </div>
+    </FormGroup>
+  )
 }
+
+export default reduxForm({form: 'loginForm'})(Login)
