@@ -29,4 +29,3 @@ export const Section = styled.section`
 export const Sidebar = styled.aside`
   grid-area: sidebar
 `
-
