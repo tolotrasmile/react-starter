@@ -8,7 +8,6 @@ export default ({ component: Component, render, ...rest }) => {
       ? <Component {...props} />
       : <Redirect to={{ pathname: '/login', state: { from: rest.location } }}/>
     }/>
-
   }
   if (render) {
     return <Route {...rest} render={props => auth.isAuthenticated === true

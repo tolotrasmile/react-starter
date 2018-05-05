@@ -3,6 +3,7 @@ import { auth } from '../../auth'
 import { Redirect } from 'react-router-dom'
 import { Form, Field, reduxForm } from 'redux-form'
 import { Label, Input, FormGroup, Button, Heading } from '../controls/Controls'
+import Wrapper from '../controls/Wrapper'
 
 class Login extends React.Component {
   constructor (props) {
@@ -36,16 +37,18 @@ class Login extends React.Component {
     }
 
     return (
-      <Form onSubmit={handleSubmit(this.login)}>
-        <Heading>Login</Heading>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <Field name='login' label='Login' type='text' component={this.renderInput}/>
-        <Field name='password' label='Password' type='password' component={this.renderInput}/>
-        <div>
-          <Button disabled={pristine || submitting} outline active={false} type='submit'>Login</Button>
-          <Button onClick={this.signIn}>Sign in</Button>
-        </div>
-      </Form>
+      <Wrapper>
+        <Form onSubmit={handleSubmit(this.login)}>
+          <Heading>Login</Heading>
+          <p>You must log in to view the page at {from.pathname}</p>
+          <Field name='login' label='Login' type='text' component={this.renderInput}/>
+          <Field name='password' label='Password' type='password' component={this.renderInput}/>
+          <div>
+            <Button disabled={pristine || submitting} outline active={false} type='submit'>Login</Button>
+            <Button onClick={this.signIn}>Sign in</Button>
+          </div>
+        </Form>
+      </Wrapper>
     )
   }
 
