@@ -10,12 +10,13 @@ export const Heading = styled.h1`
 
 export const StyledLink = styled(Link)`
   font-size: 1em;
-  margin: 1em;
+  margin: 0 1em;
   color: white;
   font-weight: bold;
   text-decoration: none;
+  transition: all .1s ease-in;
   :hover {
-    border-bottom: 1px solid white;
+    border-bottom: 4px solid white;
   }
 `
 
@@ -81,4 +82,8 @@ export const Button = styled.button`
     color: #d8d8d8;
     border: 1px solid #d8d8d8;
   `}
+`
+
+export const Hr = styled.hr`
+  border: 0.5px solid ${defaultColor};
 `

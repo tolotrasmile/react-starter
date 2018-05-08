@@ -11,12 +11,12 @@ class App extends Component {
   render () {
     return (
       <Switch>
-        <Route path="/login" component={Login}/>
-        <Route path="/signin" component={SignIn}/>
-        <AuthRoute exact path="/" component={Home}/>
-        <AuthRoute exact path="/test1" render={props => <Heading {...props}>Test1</Heading>}/>
-        <AuthRoute exact path="/test2" component={Home}/>
-        <AuthRoute exact path="/test3" component={Home}/>
+        <Route path="/login" component={Login} />
+        <Route path="/signin" component={SignIn} />
+        <AuthRoute exact path="/" component={Home} />
+        <AuthRoute exact path="/test1" render={props => <Heading {...props}>Test1</Heading>} />
+        <AuthRoute exact path="/test2" component={Home} />
+        <AuthRoute exact path="/test3" component={Home} />
       </Switch>
     )
   }

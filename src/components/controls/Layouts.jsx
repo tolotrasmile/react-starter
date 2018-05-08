@@ -10,7 +10,7 @@ export const Footer = styled.footer`
 
 export const Header = styled.header`
   height: 3em;
-  display: flex;
+  line-height: 3em;
   background-color: palevioletred;
   grid-area: header
 `
