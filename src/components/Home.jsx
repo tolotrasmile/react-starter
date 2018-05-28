@@ -1,8 +1,9 @@
+import { Body, Footer, Header, Section } from './controls/Layouts'
+import { Button, Heading, Hr, StyledLink } from './controls/Controls'
 import React, { Component } from 'react'
-import { auth } from '../auth'
-import { Body, Footer, Header, Section, Sidebar } from './controls/Layouts'
-import { Button, Heading, StyledLink, StyledNavLink, Hr } from './controls/Controls'
+
 import Wrapper from './controls/Wrapper'
+import { auth } from '../auth'
 
 export default class Home extends Component {
   render () {

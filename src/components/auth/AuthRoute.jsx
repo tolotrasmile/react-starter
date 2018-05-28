@@ -15,6 +15,5 @@ export default ({ component: Component, render, ...rest }) => {
       : <Redirect to={{ pathname: '/login', state: { from: rest.location } }}/>}
     />
   }
-
-  throw new Error('You must specify your component or render a component in props')
+  throw new Error('You must specify your component or render function in props')
 }

@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import { Link, NavLink } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
 const defaultColor = 'palevioletred'
 
@@ -45,7 +45,7 @@ export const Input = styled.input`
     outline: none;
   }
   transition: border .3s ease-in;
-  border: 1px solid ${(props) => props.active ? defaultColor : '#eee'};
+  border: 1px solid ${({ active }) => active ? defaultColor : '#eee'};
 `
 
 export const Button = styled.button`
@@ -57,11 +57,11 @@ export const Button = styled.button`
   transition: background-color .3s ease-in;
   border: 1px solid ${defaultColor};
 
-  ${props => !props.disabled && css`
+  ${({ disabled }) => !disabled && css`
     :hover {
       color: ${defaultColor};
       background: white;
-      ${props => props.outline && css`
+      ${({ outline }) => outline && css`
         background: ${defaultColor};
         color: white;
       `}
@@ -72,12 +72,12 @@ export const Button = styled.button`
     outline: none;
   }
 
-  ${props => props.outline && css`
+  ${({ outline }) => outline && css`
     background: white;
     color: ${defaultColor};
   `}
 
-  ${props => props.disabled && css`
+  ${({ disabled }) => disabled && css`
     background: white;
     color: #d8d8d8;
     border: 1px solid #d8d8d8;
